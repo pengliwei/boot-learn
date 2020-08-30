@@ -2,6 +2,7 @@ package com.learn.system.model.entity;
 
 import java.util.Date;
 
+
 public class AdjustSalary {
     private Integer id;
 
