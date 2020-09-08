@@ -1,6 +1,6 @@
 package com.learn.system.model.entity;
 
-public class HrRole {
+public class UserRole {
     private Integer id;
 
     private Integer hrid;

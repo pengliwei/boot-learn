@@ -1,7 +1,7 @@
 package com.learn.commom.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learn.system.model.entity.Hr;
+import com.learn.system.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -55,7 +55,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
                     username, password);
             setDetails(request, authRequest);
-            Hr principal = new Hr();
+            User principal = new User();
             principal.setUsername(username);
             sessionRegistry.registerNewSession(request.getSession(true).getId(), principal);
             return this.getAuthenticationManager().authenticate(authRequest);

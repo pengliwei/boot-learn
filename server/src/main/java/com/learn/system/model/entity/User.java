@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-public class Hr implements UserDetails {
+public class User implements UserDetails {
     private Integer id;
 
     private String name;
@@ -36,7 +36,7 @@ public class Hr implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hr hr = (Hr) o;
+        User hr = (User) o;
         return Objects.equals(username, hr.username);
     }
 

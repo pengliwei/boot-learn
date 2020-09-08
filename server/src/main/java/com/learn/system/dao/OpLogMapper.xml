@@ -5,10 +5,10 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="addDate" property="adddate" jdbcType="DATE"/>
         <result column="operate" property="operate" jdbcType="VARCHAR"/>
-        <result column="hrid" property="hrid" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, addDate, operate, hrid
+    id, addDate, operate, userid
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -22,9 +22,9 @@
   </delete>
     <insert id="insert" parameterType="com.learn.system.model.entity.OpLog">
     insert into oplog (id, addDate, operate, 
-      hrid)
+      userid)
     values (#{id,jdbcType=INTEGER}, #{adddate,jdbcType=DATE}, #{operate,jdbcType=VARCHAR}, 
-      #{hrid,jdbcType=INTEGER})
+      #{userid,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="com.learn.system.model.entity.OpLog">
         insert into oplog
@@ -38,8 +38,8 @@
             <if test="operate != null">
                 operate,
             </if>
-            <if test="hrid != null">
-                hrid,
+            <if test="userid != null">
+                userid,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -52,8 +52,8 @@
             <if test="operate != null">
                 #{operate,jdbcType=VARCHAR},
             </if>
-            <if test="hrid != null">
-                #{hrid,jdbcType=INTEGER},
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
@@ -66,8 +66,8 @@
             <if test="operate != null">
                 operate = #{operate,jdbcType=VARCHAR},
             </if>
-            <if test="hrid != null">
-                hrid = #{hrid,jdbcType=INTEGER},
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -76,7 +76,7 @@
     update oplog
     set addDate = #{adddate,jdbcType=DATE},
       operate = #{operate,jdbcType=VARCHAR},
-      hrid = #{hrid,jdbcType=INTEGER}
+      userid = #{userid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

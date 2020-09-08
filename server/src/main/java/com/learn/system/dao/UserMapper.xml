@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.learn.system.dao.HrMapper">
-    <resultMap id="BaseResultMap" type="com.learn.system.model.entity.Hr">
+<mapper namespace="com.learn.system.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.learn.system.model.entity.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="CHAR"/>
@@ -13,7 +13,7 @@
         <result column="userface" property="userface" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="HrWithRoles" type="com.learn.system.model.entity.Hr" extends="BaseResultMap">
+    <resultMap id="userWithRoles" type="com.learn.system.model.entity.User" extends="BaseResultMap">
         <collection property="roles" ofType="com.learn.system.model.entity.Role">
             <id column="rid" property="id"/>
             <result column="rname" property="name"/>
@@ -23,36 +23,36 @@
     <sql id="Base_Column_List">
     id, name, phone, telephone, address, enabled, username, password, userface, remark
   </sql>
-    <select id="getAllHrsExceptCurrentHr" resultMap="BaseResultMap">
-        select * from hr where id !=#{id};
+    <select id="getAllusersExceptCurrentUser" resultMap="BaseResultMap">
+        select * from user where id !=#{id};
     </select>
-    <select id="getAllHrs" resultMap="HrWithRoles">
-        select hr.id, hr.name, hr.phone, hr.telephone, hr.address, hr.enabled, hr.username, hr.userface,
-        hr.remark,r.`id` as rid,r.`name` as rname,r.`nameZh` as rnameZh from hr left join hr_role hrr on
-        hr.`id`=hrr.`hrid` left join role r on hrr.`rid`=r.`id` where hr.`id`!=#{hrid}
+    <select id="getAllUsers" resultMap="userWithRoles">
+        select user.id, user.name, user.phone, user.telephone, user.address, user.enabled, user.username, user.userface,
+        user.remark,r.`id` as rid,r.`name` as rname,r.`nameZh` as rnameZh from user left join user_role userr on
+        user.`id`=userr.`userid` left join role r on userr.`rid`=r.`id` where user.`id`!=#{userid}
         <if test="keywords!=null">
-            and hr.name like concat('%',#{keywords},'%')
+            and user.name like concat('%',#{keywords},'%')
         </if>
-        order by hr.id
+        order by user.id
     </select>
-    <select id="getHrRolesById" resultType="com.learn.system.model.entity.Role">
-    select r.* from role r,hr_role hrr where hrr.`rid`=r.`id` and hrr.`hrid`=#{id}
+    <select id="getUserRolesById" resultType="com.learn.system.model.entity.Role">
+    select r.* from role r,user_role userr where userr.`rid`=r.`id` and userr.`userid`=#{id}
   </select>
     <select id="loadUserByUsername" resultMap="BaseResultMap">
-    select * from hr where username=#{username}
+    select * from user where username=#{username}
   </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from hr
+        from user
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hr
+    delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.learn.system.model.entity.Hr">
-    insert into hr (id, name, phone, 
+    <insert id="insert" parameterType="com.learn.system.model.entity.User">
+    insert into user (id, name, phone,
       telephone, address, enabled, 
       username, password, userface, 
       remark)
@@ -61,8 +61,8 @@
       #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-    <insert id="insertSelective" parameterType="com.learn.system.model.entity.Hr">
-        insert into hr
+    <insert id="insertSelective" parameterType="com.learn.system.model.entity.User">
+        insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
@@ -128,8 +128,8 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.learn.system.model.entity.Hr">
-        update hr
+    <update id="updateByPrimaryKeySelective" parameterType="com.learn.system.model.entity.User">
+        update user
         <set>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
@@ -162,13 +162,13 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateUserface">
-        update hr set userface = #{url} where id=#{id};
+        update user set userface = #{url} where id=#{id};
     </update>
     <update id="updatePasswd">
-        update hr set password = #{encodePass} where id=#{hrid};
+        update user set password = #{encodePass} where id=#{userid};
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.learn.system.model.entity.Hr">
-    update hr
+    <update id="updateByPrimaryKey" parameterType="com.learn.system.model.entity.User">
+    update user
     set name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=CHAR},
       telephone = #{telephone,jdbcType=VARCHAR},

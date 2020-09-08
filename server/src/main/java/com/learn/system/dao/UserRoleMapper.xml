@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.learn.system.dao.HrRoleMapper">
-    <resultMap id="BaseResultMap" type="com.learn.system.model.entity.HrRole">
+<mapper namespace="com.learn.system.dao.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.learn.system.model.entity.UserRole">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="hrid" property="hrid" jdbcType="INTEGER"/>
+        <result column="userid" property="userid" jdbcType="INTEGER"/>
         <result column="rid" property="rid" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, hrid, rid
+    id, userid, rid
   </sql>
-    <delete id="deleteByHrid">
-    delete from hr_role where hrid=#{hrid}
+    <delete id="deleteByuserid">
+    delete from user_role where userid=#{userid}
   </delete>
     <insert id="addRole">
-        insert into hr_role (hrid,rid) values
+        insert into user_role (userid,rid) values
         <foreach collection="rids" item="rid" separator=",">
-            (#{hrid},#{rid})
+            (#{userid},#{rid})
         </foreach>
     </insert>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
-        from hr_role
+        from user_role
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from hr_role
+    delete from user_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.learn.system.model.entity.HrRole">
-    insert into hr_role (id, hrid, rid
+    <insert id="insert" parameterType="com.learn.system.model.entity.UserRole">
+    insert into user_role (id, userid, rid
       )
-    values (#{id,jdbcType=INTEGER}, #{hrid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.learn.system.model.entity.HrRole">
-        insert into hr_role
+    <insert id="insertSelective" parameterType="com.learn.system.model.entity.UserRole">
+        insert into user_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="hrid != null">
-                hrid,
+            <if test="userid != null">
+                userid,
             </if>
             <if test="rid != null">
                 rid,
@@ -51,19 +51,19 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="hrid != null">
-                #{hrid,jdbcType=INTEGER},
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
             </if>
             <if test="rid != null">
                 #{rid,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.learn.system.model.entity.HrRole">
-        update hr_role
+    <update id="updateByPrimaryKeySelective" parameterType="com.learn.system.model.entity.UserRole">
+        update user_role
         <set>
-            <if test="hrid != null">
-                hrid = #{hrid,jdbcType=INTEGER},
+            <if test="userid != null">
+                userid = #{userid,jdbcType=INTEGER},
             </if>
             <if test="rid != null">
                 rid = #{rid,jdbcType=INTEGER},
@@ -71,9 +71,9 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.learn.system.model.entity.HrRole">
-    update hr_role
-    set hrid = #{hrid,jdbcType=INTEGER},
+    <update id="updateByPrimaryKey" parameterType="com.learn.system.model.entity.UserRole">
+    update user_role
+    set userid = #{userid,jdbcType=INTEGER},
       rid = #{rid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

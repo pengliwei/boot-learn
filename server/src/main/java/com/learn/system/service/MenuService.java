@@ -3,7 +3,7 @@ package com.learn.system.service;
 
 import com.learn.system.dao.MenuMapper;
 import com.learn.system.dao.MenuRoleMapper;
-import com.learn.system.model.entity.Hr;
+import com.learn.system.model.entity.User;
 import com.learn.system.model.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -23,8 +23,8 @@ public class MenuService {
     @Autowired
     MenuRoleMapper menuRoleMapper;
 
-    public List<Menu> getMenusByHrId() {
-        return menuMapper.getMenusByHrId(((Hr) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
+    public List<Menu> getMenusByUserId() {
+        return menuMapper.getMenusByUserId(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
 
     @Cacheable
