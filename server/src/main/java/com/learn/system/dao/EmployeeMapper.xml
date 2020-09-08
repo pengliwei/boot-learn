@@ -63,7 +63,7 @@
     select max(workID) from employee
   </select>
     <resultMap id="EmployeeWithSalary" type="com.learn.system.model.entity.Employeeec" extends="BaseResultMap">
-        <association property="salary" javaType="org.javaboy.vhr.model.Salary">
+        <association property="salary" javaType="com.learn.system.model.entity.Salary">
             <id column="sid" property="id" jdbcType="INTEGER"/>
             <result column="sbasicSalary" property="basicSalary" jdbcType="INTEGER"/>
             <result column="sbonus" property="bonus" jdbcType="INTEGER"/>

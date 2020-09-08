@@ -3,15 +3,11 @@ package com.learn.system.model.entity;
 import java.util.List;
 
 /**
- * @作者 江南一点雨
- * @公众号 江南一点雨
- * @微信号 a_java_boy
- * @GitHub https://github.com/lenve
- * @博客 http://wangsong.blog.csdn.net
- * @网站 http://www.javaboy.org
- * @时间 2019-10-29 7:42
+ * @description: 返回数据
+ * @author: PENGLW
+ * @date: 2020/8/30
  */
-public class RespPageBean {
+public class ResponsePageBean {
     private Long total;
     private List<?> data;
 

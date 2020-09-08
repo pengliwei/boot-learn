@@ -75,7 +75,7 @@
     delete from menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="org.javaboy.vhr.model.Menu">
+    <insert id="insert" parameterType="com.learn.system.model.entity.Menu">
     insert into menu (id, url, path, 
       component, name, iconCls, 
       keepAlive, requireAuth, parentId, 

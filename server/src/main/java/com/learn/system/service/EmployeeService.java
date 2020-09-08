@@ -5,7 +5,7 @@ import com.learn.system.dao.EmployeeMapper;
 import com.learn.system.model.entity.Employee;
 import com.learn.system.model.entity.MailConstants;
 import com.learn.system.model.entity.MailSendLog;
-import com.learn.system.model.entity.RespPageBean;
+import com.learn.system.model.entity.ResponsePageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -32,13 +32,13 @@ public class EmployeeService {
     SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
     DecimalFormat decimalFormat = new DecimalFormat("##.00");
 
-    public RespPageBean getEmployeeByPage(Integer page, Integer size, Employee employee, Date[] beginDateScope) {
+    public ResponsePageBean getEmployeeByPage(Integer page, Integer size, Employee employee, Date[] beginDateScope) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
         List<Employee> data = employeeMapper.getEmployeeByPage(page, size, employee, beginDateScope);
         Long total = employeeMapper.getTotal(employee, beginDateScope);
-        RespPageBean bean = new RespPageBean();
+        ResponsePageBean bean = new ResponsePageBean();
         bean.setData(data);
         bean.setTotal(total);
         return bean;
@@ -83,12 +83,12 @@ public class EmployeeService {
         return employeeMapper.addEmps(list);
     }
 
-    public RespPageBean getEmployeeByPageWithSalary(Integer page, Integer size) {
+    public ResponsePageBean getEmployeeByPageWithSalary(Integer page, Integer size) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
         List<Employee> list = employeeMapper.getEmployeeByPageWithSalary(page, size);
-        RespPageBean respPageBean = new RespPageBean();
+        ResponsePageBean respPageBean = new ResponsePageBean();
         respPageBean.setData(list);
         respPageBean.setTotal(employeeMapper.getTotal(null, null));
         return respPageBean;
