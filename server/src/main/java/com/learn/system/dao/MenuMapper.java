@@ -1,7 +1,9 @@
 package com.learn.system.dao;
 
 
+import com.learn.system.model.dto.MenuDTO;
 import com.learn.system.model.entity.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +27,22 @@ public interface MenuMapper {
     List<Menu> getAllMenus();
 
     List<Integer> getMidsByRid(Integer rid);
+
+    /**
+     * 获取分页记录数
+     *
+     * @param menu
+     * @return
+     */
+    Long getTotal(@Param("menu") Menu menu);
+
+    /**
+     * 分页条件查询菜单
+     *
+     * @param page
+     * @param size
+     * @param menu
+     * @return
+     */
+    List<MenuDTO> getMenuByFilter(@Param("page")Integer page, @Param("size")Integer size, @Param("menu")Menu menu);
 }

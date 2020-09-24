@@ -31,7 +31,7 @@
         <result column="endContract" property="endContract" jdbcType="DATE"/>
         <result column="workAge" property="workAge" jdbcType="INTEGER"/>
     </resultMap>
-    <resultMap id="AllEmployeeInfo" type="com.learn.system.model.entity.Employeeec" extends="BaseResultMap">
+    <resultMap id="AllEmployeeInfo" type="com.learn.system.model.entity.Employee" extends="BaseResultMap">
         <association property="nation" javaType="com.learn.system.model.entity.Nation">
             <id column="nid" property="id"/>
             <result column="nname" property="name"/>

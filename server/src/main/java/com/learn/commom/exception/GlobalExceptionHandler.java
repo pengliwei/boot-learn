@@ -4,7 +4,6 @@ import com.learn.system.model.entity.ResponseBean;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
@@ -14,8 +13,9 @@ import java.sql.SQLIntegrityConstraintViolationException;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(SQLException.class)
-    public ResponseBean sqlException(SQLException e) {
+    @ExceptionHandler(Exception.class)
+    public ResponseBean sqlException(Exception e) {
+        e.printStackTrace();
         if (e instanceof SQLIntegrityConstraintViolationException) {
             return ResponseBean.error("该数据有关联数据，操作失败!");
         }

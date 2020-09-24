@@ -1,9 +1,14 @@
-package com.learn.system.model.entity;
+package com.learn.system.model.dto;
 
-import java.io.Serializable;
-import java.util.List;
+import com.learn.system.model.entity.Menu;
 
-public class Menu implements Serializable {
+/**
+ * @description:
+ * @author: PENGLW
+ * @date: 2020/9/17
+ */
+public class MenuDTO {
+
     private Integer id;
 
     private String url;
@@ -14,41 +19,13 @@ public class Menu implements Serializable {
 
     private String name;
 
-    private String iconCls;
-
-    private Meta meta;
+//    private String iconCls;
 
     private Integer parentId;
 
     private Integer isLeaf;
 
-    private Boolean enabled;
-    private List<Menu> children;
-    private List<Role> roles;
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Meta getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Meta meta) {
-        this.meta = meta;
-    }
-
-    public List<Menu> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Menu> children) {
-        this.children = children;
-    }
+    private boolean hasChildren;
 
     public Integer getId() {
         return id;
@@ -90,14 +67,6 @@ public class Menu implements Serializable {
         this.name = name;
     }
 
-    public String getIconCls() {
-        return iconCls;
-    }
-
-    public void setIconCls(String iconCls) {
-        this.iconCls = iconCls;
-    }
-
     public Integer getParentId() {
         return parentId;
     }
@@ -106,12 +75,12 @@ public class Menu implements Serializable {
         this.parentId = parentId;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public boolean isHasChildren() {
+        return hasChildren;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
     }
 
     public Integer getIsLeaf() {
