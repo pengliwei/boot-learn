@@ -18,14 +18,14 @@
       <!-- <el-tree lazy :props="defaultProps" @node-click="loadNode"></el-tree> -->
       <el-form-item label="上级类目" prop="id">
         <!-- 调用树形下拉框组件 -->
-        <SelectTree
+        <!-- <SelectTree
           :props="props1"
           :options="optionData"
           :value="id"
           :clearable="isClearable"
           :accordion="isAccordion"
           @getValue="getValue($event)"
-        />
+        /> -->
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">

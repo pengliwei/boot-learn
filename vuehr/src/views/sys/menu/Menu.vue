@@ -36,7 +36,7 @@ import eForm from './form'
 
 export default {
   components: { eForm },
-  name: 'SysMenu',
+  name: 'Menu',
   data() {
     return {
       loading: false,
