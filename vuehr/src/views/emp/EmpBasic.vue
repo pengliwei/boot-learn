@@ -812,7 +812,7 @@
             getMaxWordID() {
                 this.getRequest("/employee/basic/maxWorkID").then(resp => {
                     if (resp) {
-                        this.emp.workID = resp.obj;
+                        this.emp.workID = resp.data;
                     }
                 })
             },

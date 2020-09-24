@@ -115,7 +115,7 @@
             doAddDep() {
                 this.postRequest("/system/basic/department/", this.dep).then(resp => {
                     if (resp) {
-                        this.addDep2Deps(this.deps, resp.obj);
+                        this.addDep2Deps(this.deps, resp.data);
                         this.dialogVisible = false;
                         //初始化变量
                         this.initDep();

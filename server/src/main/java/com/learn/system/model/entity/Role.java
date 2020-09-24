@@ -2,12 +2,31 @@ package com.learn.system.model.entity;
 
 import java.io.Serializable;
 
+/**
+ * @description: 角色实体
+ * @author: PENGLW
+ * @date: 2020/9/8
+ */
 public class Role implements Serializable {
+    /**
+     * 主键
+     */
     private Integer id;
 
+    /**
+     * 名称
+     */
     private String name;
 
-    private String nameZh;
+    /**
+     * 描述
+     */
+    private String description;
+
+    /**
+     * 状态
+     */
+    private int status;
 
     public Integer getId() {
         return id;
@@ -22,14 +41,22 @@ public class Role implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
-    public String getNameZh() {
-        return nameZh;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNameZh(String nameZh) {
-        this.nameZh = nameZh;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

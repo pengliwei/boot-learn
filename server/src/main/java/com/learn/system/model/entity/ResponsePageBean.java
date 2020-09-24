@@ -11,6 +11,14 @@ public class ResponsePageBean {
     private Long total;
     private List<?> data;
 
+    public ResponsePageBean() {
+    }
+
+    public ResponsePageBean(Long total, List<?> data) {
+        this.total = total;
+        this.data = data;
+    }
+
     public Long getTotal() {
         return total;
     }

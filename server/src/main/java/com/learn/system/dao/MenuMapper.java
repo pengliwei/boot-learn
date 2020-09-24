@@ -22,6 +22,10 @@ public interface MenuMapper {
 
     List<Menu> getMenusByUserId(Integer userid);
 
+    /**
+     * 获取当前角色下的菜单
+     * @return
+     */
     List<Menu> getAllMenusWithRole();
 
     List<Menu> getAllMenus();

@@ -1,31 +1,40 @@
 package com.learn.system.service;
 
 
-import com.learn.system.dao.RoleMapper;
+import com.learn.system.model.entity.Menu;
+import com.learn.system.model.entity.ResponseBean;
+import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.model.entity.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 
-@Service
-public class RoleService {
-    @Autowired
-    RoleMapper roleMapper;
+/**
+ * @description: 角色管理service层
+ * @author: PENGLW
+ * @date: 2020/9/24
+ */
+public interface RoleService {
 
-    public List<Role> getAllRoles() {
-        return roleMapper.getAllRoles();
-    }
+    /**
+     * 获取所有角色
+     *
+     * @return
+     */
+    ResponseBean getAllRoles();
 
-    public Integer addRole(Role role) {
-        if (!role.getName().startsWith("ROLE_")) {
-            role.setName("ROLE_" + role.getName());
-        }
-        return roleMapper.insert(role);
-    }
+    /**
+     * 获取所有角色
+     *
+     * @param page 第几页
+     * @param size 页码
+     * @return
+     */
+    ResponsePageBean getRoleByFilter(Integer page, Integer size);
 
-    public Integer deleteRoleById(Integer rid) {
-        return roleMapper.deleteByPrimaryKey(rid);
-    }
+
+    Integer addRole(Role role);
+
+    public Integer deleteRoleById(Integer rid);
 }

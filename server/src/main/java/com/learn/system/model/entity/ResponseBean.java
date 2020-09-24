@@ -11,7 +11,7 @@ public class ResponseBean {
 
     private String msg;
 
-    private Object obj;
+    private Object data;
 
     public static ResponseBean build() {
         return new ResponseBean();
@@ -21,25 +21,31 @@ public class ResponseBean {
         return new ResponseBean(200,msg,null);
     }
 
-    public static ResponseBean ok(String msg, Object obj){
-        return new ResponseBean(200,msg,obj);
+    public static ResponseBean ok(String msg, Object data){
+        return new ResponseBean(200,msg,data);
     }
 
     public static ResponseBean error(String msg){
         return new ResponseBean(500,msg,null);
     }
 
-    public static ResponseBean error(String msg, Object obj){
-        return new ResponseBean(500,msg,obj);
+    public static ResponseBean error(String msg, Object data){
+        return new ResponseBean(500,msg,data);
     }
 
-    private ResponseBean() {
+    public ResponseBean() {
     }
 
-    private ResponseBean(Integer status, String msg, Object obj){
+    public ResponseBean( String msg, Object data){
+        this.status = 200;
+        this.msg = msg;
+        this.data = data;
+    }
+
+    public ResponseBean(Integer status, String msg, Object data){
         this.status = status;
         this.msg = msg;
-        this.obj = obj;
+        this.data = data;
     }
 
     public Integer getStatus() {
@@ -58,11 +64,11 @@ public class ResponseBean {
         this.msg = msg;
     }
 
-    public Object getObj() {
-        return obj;
+    public Object getData() {
+        return data;
     }
 
-    public void setObj(Object obj) {
-        this.obj = obj;
+    public void setData(Object data) {
+        this.data = data;
     }
 }
