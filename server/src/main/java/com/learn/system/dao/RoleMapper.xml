@@ -3,7 +3,7 @@
 <mapper namespace="com.learn.system.dao.RoleMapper">
 
     <resultMap id="BaseResultMap" type="com.learn.system.model.entity.Role">
-        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="VARCHAR"/>
@@ -42,9 +42,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="com.learn.system.model.entity.Role">
-    insert into role (id, name, nameZh
+    insert into role (id, name, description, status
       )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.learn.system.model.entity.Role">

@@ -1,13 +1,9 @@
 package com.learn.system.service;
 
 
-import com.learn.system.model.entity.Menu;
 import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.model.entity.Role;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 
 /**
@@ -33,7 +29,12 @@ public interface RoleService {
      */
     ResponsePageBean getRoleByFilter(Integer page, Integer size);
 
-
+    /**
+     * 添加角色
+     *
+     * @param role
+     * @return
+     */
     Integer addRole(Role role);
 
     public Integer deleteRoleById(Integer rid);

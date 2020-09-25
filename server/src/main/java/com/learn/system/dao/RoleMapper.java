@@ -8,6 +8,11 @@ import java.util.List;
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
 
+    /**
+     * 新增角色
+     * @param record
+     * @return
+     */
     int insert(Role record);
 
     int insertSelective(Role record);

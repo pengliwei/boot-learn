@@ -1,5 +1,6 @@
 package com.learn.system.service.impl;
 
+import com.learn.commom.utils.IDGenerator;
 import com.learn.system.dao.RoleMapper;
 import com.learn.system.model.dto.MenuDTO;
 import com.learn.system.model.entity.ResponseBean;
@@ -46,11 +47,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Integer addRole(Role role) {
-        if (!role.getName().startsWith("ROLE_")) {
-            role.setName("ROLE_" + role.getName());
-        }
-        return roleMapper.insert(role);
-    }
+        role.setId(IDGenerator.newID());
+        role.setStatus(1);
+        int insert = roleMapper.insert(role);
+        return insert;
+}
 
     @Override
     public Integer deleteRoleById(Integer rid) {

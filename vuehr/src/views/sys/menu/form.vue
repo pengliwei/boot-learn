@@ -50,54 +50,17 @@ export default {
     return {
       dialog: false,
       menu: [],
-      isClearable: true, // 可清空（可选）
-      isAccordion: true, // 可收起（可选）
-      id: 2, // 初始ID（可选）
-      props1: {
-        // 配置项（必选）
-        value: 'id',
-        label: 'name',
-        children: ()=>[],
-      },
       form: {
         loading: false,
-        commodity_id: '',
-        level: 1,
-        nick: '',
-        icon_url: '',
         content: '',
       },
     }
   },
-  computed: {
-      /* 转树形数据 */
-      // optionData() {
-      //   let url = '/system/menu1'
-      //   this.getRequest(url).then((resp) => {
-      //     if (resp) {
-      //       console.log(resp.data)
-      //       let a = resp.data
-      //       return a.filter((father) => {
-      //         // 循环所有项，并添加children属性
-      //         let branchArr = a.filter(
-      //           (child) => father.id == child.parentId
-      //         ) // 返回每一项的子级数组
-      //         branchArr.length > 0 ? (father.children = branchArr) : '' //给父级添加一个children属性，并赋值
-      //         return father.parentId == 1 //返回第一层
-      //       })
-      //     }
-      //   })
-      // },
-    },
+
   methods: {
     cancel() {
       this.resetForm()
     },
-    // 取值
-    getValue(value){
-      this.id = value
-      console.log(this.id);
-    } 
   }
 }
 </script>

@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.learn.system.dao.MenuMapper">
     <resultMap id="BaseResultMap" type="com.learn.system.model.entity.Menu">
-        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
         <result column="component" property="component" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="iconCls" property="iconCls" jdbcType="VARCHAR"/>
-        <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+        <result column="parentId" property="parentId" jdbcType="VARCHAR"/>
         <result column="enabled" property="enabled" jdbcType="BIT"/>
         <association property="meta" javaType="com.learn.system.model.entity.Meta">
             <result column="keepAlive" property="keepAlive" jdbcType="BIT"/>
@@ -17,13 +17,13 @@
     </resultMap>
 
     <resultMap id="menuDto" type="com.learn.system.model.dto.MenuDTO">
-        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
         <result column="component" property="component" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
 <!--        <result column="iconCls" property="iconCls" jdbcType="VARCHAR"/>-->
-        <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+        <result column="parentId" property="parentId" jdbcType="VARCHAR"/>
         <result column="isLeaf" property="isLeaf" jdbcType="INTEGER"/>
     </resultMap>
 

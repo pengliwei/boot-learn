@@ -9,6 +9,7 @@ import com.learn.system.model.entity.User;
 import com.learn.system.model.dto.MenuDTO;
 import com.learn.system.service.MenuService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -69,9 +70,9 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public ResponsePageBean getMenuByFilter(Menu menu) {
         //设置初始菜单
-        Integer parentId = menu.getParentId();
-        if (parentId == null || parentId == 0) {
-            menu.setParentId(1);
+        String parentId = menu.getParentId();
+        if (!StringUtils.isNotBlank(parentId)) {
+            menu.setParentId("1");
         }
         Long total = menuMapper.getTotal(menu);
         //设置当前菜单是否有子节点
@@ -92,9 +93,9 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public ResponsePageBean getMenuByFilter1(Menu menu) {
         //设置初始菜单
-        Integer parentId = menu.getParentId();
-        if (parentId == null || parentId == 0) {
-            menu.setParentId(1);
+        String parentId = menu.getParentId();
+        if (StringUtils.isNotBlank(parentId)) {
+            menu.setParentId("1");
         }
         Long total = menuMapper.getTotal(menu);
         //设置当前菜单是否有子节点
