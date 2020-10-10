@@ -2,13 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.learn.system.dao.MenuRoleMapper">
     <resultMap id="BaseResultMap" type="com.learn.system.model.entity.MenuRole">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="mid" property="mid" jdbcType="INTEGER"/>
-        <result column="rid" property="rid" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, mid, rid
-  </sql>
+    id, role_id, menu_id
+    </sql>
+
+    <select id="getMenuIdsByRoleId" resultType="java.lang.String" parameterType="java.lang.String">
+        select
+        menu_id menuId
+        from menu_role
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
+
+
     <delete id="deleteByRid">
     delete from menu_role where rid=#{rid}
   </delete>

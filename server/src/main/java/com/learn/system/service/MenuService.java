@@ -2,6 +2,7 @@ package com.learn.system.service;
 
 
 import com.learn.system.model.entity.Menu;
+import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 
 import java.util.List;
@@ -12,8 +13,6 @@ public interface MenuService {
     List<Menu> getMenusByUserId();
 
     List<Menu> getAllMenusWithRole();
-
-    List<Menu> getAllMenus();
 
     List<Integer> getMidsByRid(Integer rid);
 
@@ -26,5 +25,9 @@ public interface MenuService {
      */
     ResponsePageBean getMenuByFilter(Menu menu);
 
-    ResponsePageBean getMenuByFilter1(Menu menu);
+    /**
+     * 获取所有菜单
+     * @return
+     */
+    ResponseBean getAllMenus();
 }

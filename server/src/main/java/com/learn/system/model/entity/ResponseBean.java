@@ -1,5 +1,7 @@
 package com.learn.system.model.entity;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * @description: 返回对象
  * @author: PENGLW
@@ -36,10 +38,35 @@ public class ResponseBean {
     public ResponseBean() {
     }
 
-    public ResponseBean( String msg, Object data){
+    /**
+     * 输出正常有值内容的类型
+     * @param data
+     */
+    public ResponseBean(Object data) {
+        this.status = HttpStatus.OK.value();
+        this.msg = HttpStatus.OK.getReasonPhrase();
+        this.data = data;
+    }
+
+    /**
+     * 输出正常有值内容的类型
+     * @param msg
+     * @param data
+     */
+    public ResponseBean(String msg, Object data){
         this.status = 200;
         this.msg = msg;
         this.data = data;
+    }
+
+    /**
+     * 输出无值返回结果的类型
+     * @param status
+     * @param msg
+     */
+    public ResponseBean(Integer status, String msg){
+        this.status = status;
+        this.msg = msg;
     }
 
     public ResponseBean(Integer status, String msg, Object data){

@@ -1,33 +1,33 @@
 package com.learn.system.model.entity;
 
 public class MenuRole {
-    private Integer id;
+    private String id;
 
-    private Integer mid;
+    private String roleId;
 
-    private Integer rid;
+    private String menuId;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getMid() {
-        return mid;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setMid(Integer mid) {
-        this.mid = mid;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
-    public Integer getRid() {
-        return rid;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setRid(Integer rid) {
-        this.rid = rid;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 }

@@ -1,8 +1,8 @@
 package com.learn.system.service.impl;
 
 import com.learn.commom.utils.IDGenerator;
+import com.learn.system.dao.MenuRoleMapper;
 import com.learn.system.dao.RoleMapper;
-import com.learn.system.model.dto.MenuDTO;
 import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.model.entity.Role;
@@ -25,10 +25,13 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleMapper roleMapper;
 
+    @Autowired
+    MenuRoleMapper menuRoleMapper;
+
     @Override
     public ResponseBean getAllRoles() {
         List<Role> roleList = roleMapper.getAllRoles();
-        return new ResponseBean(HttpStatus.OK.getReasonPhrase(),roleList);
+        return new ResponseBean(HttpStatus.OK.getReasonPhrase(), roleList);
     }
 
     @Override
@@ -38,7 +41,7 @@ public class RoleServiceImpl implements RoleService {
         }
         //获取总记录数和数据
         Long total = roleMapper.getTotal();
-        List<Role> roleList = roleMapper.getRoleByFilter(page,size);
+        List<Role> roleList = roleMapper.getRoleByFilter(page, size);
         ResponsePageBean bean = new ResponsePageBean();
         bean.setData(roleList);
         bean.setTotal(total);
@@ -51,10 +54,21 @@ public class RoleServiceImpl implements RoleService {
         role.setStatus(1);
         int insert = roleMapper.insert(role);
         return insert;
-}
+    }
 
     @Override
     public Integer deleteRoleById(Integer rid) {
         return roleMapper.deleteByPrimaryKey(rid);
+    }
+
+    @Override
+    public ResponseBean getMenuIdsByRoleId(String roleId) {
+        //获取对应菜单并返回不同类型结果
+        List<String> menuIds = menuRoleMapper.getMenuIdsByRoleId(roleId);
+        if (CollectionUtils.isNotEmpty(menuIds)) {
+            return new ResponseBean(HttpStatus.OK.getReasonPhrase(), menuIds);
+        } else {
+            return new ResponseBean(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
+        }
     }
 }

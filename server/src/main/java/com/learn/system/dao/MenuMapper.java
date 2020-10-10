@@ -20,6 +20,13 @@ public interface MenuMapper {
 
     int updateByPrimaryKey(Menu record);
 
+    List<Integer> getMidsByRid(Integer rid);
+
+    /**
+     * 根据用户查询菜单id
+     * @param userid
+     * @return
+     */
     List<Menu> getMenusByUserId(Integer userid);
 
     /**
@@ -28,9 +35,11 @@ public interface MenuMapper {
      */
     List<Menu> getAllMenusWithRole();
 
-    List<Menu> getAllMenus();
-
-    List<Integer> getMidsByRid(Integer rid);
+    /**
+     * 获取所有菜单
+     * @return
+     */
+    List<MenuDTO> getAllMenus();
 
     /**
      * 获取分页记录数

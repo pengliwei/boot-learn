@@ -48,7 +48,6 @@ export default {
        this.dialog = false;
     },
     doSubmit() {
-        console.log(this.form);
         this.postRequest('/system/role/addRole',this.form).then(res => {
             if(res){
                 this.resetForm();

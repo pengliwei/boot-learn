@@ -8,6 +8,8 @@ import com.learn.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @description: 角色管理
  * @author: PENGLW
@@ -23,7 +25,8 @@ public class RoleController {
     MenuService menuService;
 
     /**
-     *角色列表
+     * 角色列表
+     *
      * @param page
      * @param size
      * @return
@@ -31,10 +34,11 @@ public class RoleController {
     @GetMapping("/getRoleList")
     public ResponsePageBean getAllRoles(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
 
-        return roleService.getRoleByFilter(page,size);
+        return roleService.getRoleByFilter(page, size);
     }
 
     /**
+     * 新增角色
      *
      * @param role
      * @return
@@ -47,6 +51,30 @@ public class RoleController {
         return ResponseBean.error("添加失败!");
     }
 
+    /**
+     * 获取角色对应的菜单id
+     *
+     * @param roleId
+     * @return
+     */
+    @GetMapping("/getRoleMenu")
+    public ResponseBean getRoleMenu(String roleId) {
+
+        return roleService.getMenuIdsByRoleId(roleId);
+    }
+
+    /**
+     * 保存角色关联的菜单
+     *
+     * @param menuIds
+     * @return
+     */
+    @PostMapping("/saveMenu")
+    public ResponseBean saveMenu(@RequestBody List<String> menuIds) {
+        System.out.println(menuIds);
+
+        return ResponseBean.error("添加失败!");
+    }
 
 
 }

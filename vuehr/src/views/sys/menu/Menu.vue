@@ -48,7 +48,7 @@ export default {
     this.initData()
   },
   methods: {
-    initData(tree, treeNode, resolve) {
+    initData() {
       this.loading = true
       let url = '/system/menu'
       this.getRequest(url).then((resp) => {
@@ -71,7 +71,7 @@ export default {
             }
           }
         })
-      }, 200)
+      }, 100)
     },
     edit(){
       this.isAdd = true;

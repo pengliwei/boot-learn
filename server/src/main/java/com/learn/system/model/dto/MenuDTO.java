@@ -1,6 +1,6 @@
 package com.learn.system.model.dto;
 
-import com.learn.system.model.entity.Menu;
+import java.util.List;
 
 /**
  * @description:
@@ -9,7 +9,7 @@ import com.learn.system.model.entity.Menu;
  */
 public class MenuDTO {
 
-    private Integer id;
+    private String id;
 
     private String url;
 
@@ -21,17 +21,19 @@ public class MenuDTO {
 
 //    private String iconCls;
 
-    private Integer parentId;
+    private String parentId;
 
     private Integer isLeaf;
 
     private boolean hasChildren;
 
-    public Integer getId() {
+    private List<MenuDTO> children;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -67,11 +69,11 @@ public class MenuDTO {
         this.name = name;
     }
 
-    public Integer getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
@@ -89,5 +91,13 @@ public class MenuDTO {
 
     public void setIsLeaf(Integer isLeaf) {
         this.isLeaf = isLeaf;
+    }
+
+    public List<MenuDTO> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<MenuDTO> children) {
+        this.children = children;
     }
 }

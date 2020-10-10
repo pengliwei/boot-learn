@@ -1,6 +1,7 @@
 package com.learn.system.controller.system;
 
 import com.learn.system.model.entity.Menu;
+import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +21,37 @@ public class MenuController {
     @Autowired
     MenuService menuService;
 
+    /**
+     * 根据用户获取菜单
+     *
+     * @return
+     */
     @GetMapping("/system/config/menu")
     public List<Menu> getMenusByUserId() {
         return menuService.getMenusByUserId();
     }
 
+    /**
+     * 获取菜单
+     *
+     * @param menu
+     * @return
+     */
     @GetMapping("/system/menu")
     public ResponsePageBean getEmployeeByPage(Menu menu) {
 
         return menuService.getMenuByFilter(menu);
     }
 
-    @GetMapping("/system/menu1")
-    public ResponsePageBean getEmployeeByPage1(Menu menu) {
+    /**
+     * 获取所有菜单
+     *
+     * @return
+     */
+    @GetMapping("/system/getAllMenu")
+    public ResponseBean getAllMenu() {
 
-        return menuService.getMenuByFilter1(menu);
+        return menuService.getAllMenus();
     }
 
 }
