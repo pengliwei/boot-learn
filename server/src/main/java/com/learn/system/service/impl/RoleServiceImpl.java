@@ -3,6 +3,7 @@ package com.learn.system.service.impl;
 import com.learn.commom.utils.IDGenerator;
 import com.learn.system.dao.MenuRoleMapper;
 import com.learn.system.dao.RoleMapper;
+import com.learn.system.model.entity.MenuRole;
 import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.model.entity.Role;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,13 +37,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public ResponsePageBean getRoleByFilter(Integer page, Integer size) {
+    public ResponsePageBean getRoleByFilter(Integer page, Integer size, String name) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
         //获取总记录数和数据
         Long total = roleMapper.getTotal();
-        List<Role> roleList = roleMapper.getRoleByFilter(page, size);
+        List<Role> roleList = roleMapper.getRoleByFilter(page, size, name);
         ResponsePageBean bean = new ResponsePageBean();
         bean.setData(roleList);
         bean.setTotal(total);
@@ -70,5 +72,33 @@ public class RoleServiceImpl implements RoleService {
         } else {
             return new ResponseBean(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.getReasonPhrase());
         }
+    }
+
+    @Override
+    public Integer saveMenu(String roleId, List<String> menuIds) {
+        Integer result = 1;
+        //1.删除当前角色关联的菜单
+        menuRoleMapper.deleteByRoleId(roleId);
+        //2.保存页面角色选中的关联菜单
+        List<MenuRole> menuRoleList = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(menuIds)) {
+            for (int i = 0; i < menuIds.size(); i++) {
+                MenuRole menuRole = new MenuRole();
+                menuRole.setId(IDGenerator.newID());
+                menuRole.setRoleId(roleId);
+                menuRole.setMenuId(menuIds.get(i));
+                menuRoleList.add(menuRole);
+            }
+            result = menuRoleMapper.batchInsert(menuRoleList);
+        }
+        return result;
+    }
+
+    @Override
+    public Integer delRole(String roleId) {
+        //1.删除角色关联的菜单
+        menuRoleMapper.deleteByRoleId(roleId);
+        //2.逻辑删除角色
+        return roleMapper.deleteById(roleId);
     }
 }

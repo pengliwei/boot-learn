@@ -2,6 +2,7 @@ package com.learn.system.dao;
 
 
 import com.learn.system.model.entity.Role;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public interface RoleMapper {
 
     /**
      * 新增角色
+     *
      * @param record
      * @return
      */
@@ -39,10 +41,19 @@ public interface RoleMapper {
 
     /**
      * 获取所有角色
+     *
      * @param page 第几页
      * @param size 页码
+     * @param name 角色名称
      * @return
      */
-    List<Role> getRoleByFilter(Integer page, Integer size);
+    List<Role> getRoleByFilter(@Param("page")Integer page, @Param("size")Integer size, @Param("name")String name);
 
+    /**
+     * 逻辑删除角色
+     *
+     * @param roleId
+     * @return
+     */
+    Integer deleteById(String roleId);
 }

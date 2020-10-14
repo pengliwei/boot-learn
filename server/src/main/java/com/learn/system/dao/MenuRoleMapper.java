@@ -24,8 +24,23 @@ public interface MenuRoleMapper {
 
     /**
      * 根据角色id获取对应的菜单menuIds
+     *
      * @param roleId
      * @return
      */
     List<String> getMenuIdsByRoleId(@Param("roleId") String roleId);
+
+    /**
+     * 根据角色id删除菜单menuIds
+     *
+     * @param roleId
+     */
+    void deleteByRoleId(@Param("roleId") String roleId);
+
+    /**
+     * 批量插入记录
+     * @param menuRoleList
+     * @return
+     */
+    Integer batchInsert(@Param("menuRoleList") List<MenuRole> menuRoleList);
 }

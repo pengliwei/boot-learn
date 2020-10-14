@@ -20,6 +20,9 @@
     <select id="getRoleByFilter" resultMap="BaseResultMap">
         select <include refid="Base_Column_List"/>
         from role m  where status = '1'
+        <if test="name != null and name != ''">
+            and name like concat('%',#{name},'%')
+        </if>
         <if test="page !=null and size!=null">
             limit #{page},#{size}
         </if>
@@ -29,7 +32,16 @@
         select count(*) from role m  where status = '1'
     </select>
 
+    <update id="deleteById" parameterType="java.lang.String">
+        update role set status = 0 where id = #{roleId,jdbcType=VARCHAR}
+    </update>
 
+    <insert id="insert" parameterType="com.learn.system.model.entity.Role">
+        insert into role (id, name, description, status
+          )
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+          )
+    </insert>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -41,12 +53,6 @@
     delete from role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.learn.system.model.entity.Role">
-    insert into role (id, name, description, status
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
-      )
-  </insert>
     <insert id="insertSelective" parameterType="com.learn.system.model.entity.Role">
         insert into role
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -4,9 +4,21 @@
     <eForm ref="form" :is-add="isAdd"/>
     <!--工具栏-->
     <div class="head-container">
+      <!--搜索框-->
+      <div>
+        <el-input placeholder="请输入角色名称进行搜索" prefix-icon="el-icon-search"
+                  clearable
+                  @clear="initData"
+                  style="width: 350px;margin-right: 10px" v-model="keyword">
+        </el-input>
+        <el-button icon="el-icon-search" type="primary" @click="initData">
+            搜索
+        </el-button>
+      </div>
+
       <div style="display: flex;justify-content: space-between">
-            <el-button icon="el-icon-plus" type="primary" @click="add">新增</el-button>
-        </div>
+          <el-button icon="el-icon-plus" type="primary" @click="add">新增</el-button>
+      </div>
     </div>
     <!--表格渲染-->
     <el-row :gutter="15">
@@ -16,7 +28,7 @@
           <div slot="header" class="clearfix">
             <span class="role-span">角色列表</span>
           </div>
-          <el-table :data="role" border style="width: 100%" max-height="700" row-key="id" @current-change="handleCurrentChange">
+          <el-table highlight-current-row :data="role" border style="width: 100%" max-height="700" row-key="id" @current-change="handleCurrentChange">
             <el-table-column prop="id" fixed align="left" label="角色id" v-if="false" width="100"></el-table-column>
             <el-table-column prop="name" fixed align="left" label="角色名称" width="200"></el-table-column>
             <el-table-column prop="description" label="描述" align="left" width="200"></el-table-column>
@@ -70,8 +82,9 @@
 </template>
 
 <script>
-import eForm from './form'
-import {getRequest, postRequest } from '../../../utils/api';
+import eForm from './form';
+import {Message} from 'element-ui';
+import {getRequest, postRequest, postKeyValueRequest, putRequest, deleteRequest } from '../../../utils/api';
 
 export default {
   components: { eForm },
@@ -89,7 +102,8 @@ export default {
       showButton: false,
       menuLoading: false,
       menus: [], 
-      menuIds: [], 
+      menuIds: [],
+      keyword: ''
     }
   },
   mounted() {
@@ -97,10 +111,10 @@ export default {
     this.getMenuDatas();
   },
   methods: {
-    //加载数据
+    //加载角色数据
     initData() {
       this.loading = true
-       let url = '/system/role/getRoleList?page=' + this.page + '&size=' + this.size;
+       let url = '/system/role/getRole?page=' + this.page + '&size=' + this.size + '&name=' + this.keyword;
       this.getRequest(url).then((resp) => {
         if (resp) {
           this.role = resp.data;
@@ -118,31 +132,31 @@ export default {
         this.page = currentPage;
         this.initData();
     },
-    //新增
+    //新增角色
     add(){
       this.isAdd = true;
       this.$refs.form.dialog = true
     },
-    //编辑
+    //编辑角色
     handleEdit(scope) {
       this.$refs.form.dialog = true;
       this.$refs.form.form = scope;
     },
-    //删除
+    //删除角色
     handleDelete(scope) {
       this.$confirm('确定删除吗?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.postRequest("/system/role/delRole" + scope.id).then(res => {
+        this.deleteRequest("/system/role/delRole/"+scope.id).then(res => {
           if (res) {
             this.initData();
           }
         })
       }).catch(e=>e)
     },
-    //行选中事件
+    //角色行选中事件
     handleCurrentChange(val) {
       //赋值对象
       const _this = this;
@@ -162,28 +176,28 @@ export default {
       });
       this.showButton = true;
     },
-    // 保存角色菜单
+    //保存角色菜单
     saveMenu() {
       this.menuLoading = true;
       let url = '/system/role/saveMenu';
-      this.postRequest(url,this.menuIds).then((res) => {
-        // console.log(1);
+      const parm = { 'roleId': this.roleId, 'menuIds': this.menuIds };
+      this.postRequest(url,parm).then((res) => {
         this.menuLoading = false;
+        Message.success({message: res.msg})
       });
-
     },
     //加载菜单树
     getMenuDatas() {
       let url = '/system/getAllMenu'
       this.getRequest(url).then((res) => {
-        if (res) {       
+        if (res) {
           res.data.map(item =>{
             if (item.isLeaf === 0) {
               item.isLeaf = false
             } else {
               item.isLeaf = true
             }
-          })  
+          })
           this.menus = res.data
         }
       })

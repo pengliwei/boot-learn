@@ -17,10 +17,17 @@
         where role_id = #{roleId,jdbcType=VARCHAR}
     </select>
 
+    <delete id="deleteByRoleId">
+        delete from menu_role where role_id = #{roleId,jdbcType=VARCHAR}
+    </delete>
+    
+    <insert id="batchInsert">
+        insert into menu_role (id, role_id, menu_id) values
+        <foreach collection="menuRoleList" separator="," item="item">
+            (#{item.id}, #{item.roleId},#{item.menuId})
+        </foreach>
+    </insert>
 
-    <delete id="deleteByRid">
-    delete from menu_role where rid=#{rid}
-  </delete>
     <insert id="insertRecord">
         insert into menu_role (mid,rid) values
         <foreach collection="mids" separator="," item="mid">
