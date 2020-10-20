@@ -16,16 +16,15 @@
         <el-input v-model="form.component" style="width: 350px;" />
       </el-form-item>
       <!-- <el-tree lazy :props="defaultProps" @node-click="loadNode"></el-tree> -->
-      <el-form-item label="上级类目" prop="id">
-        <!-- 调用树形下拉框组件 -->
-        <!-- <SelectTree
-          :props="props1"
-          :options="optionData"
-          :value="id"
-          :clearable="isClearable"
-          :accordion="isAccordion"
-          @getValue="getValue($event)"
-        /> -->
+      <el-form-item label="上级菜单" prop="id">
+        <treeselect
+          style="width: 350px;"
+          v-model="form.parentId"
+          :options="menuOptions"
+          :normalizer="normalizer"
+          :show-count="true"
+          placeholder="选择上级菜单"
+        />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -36,10 +35,11 @@
 </template>
 
 <script>
-import SelectTree from '@/components/util/treeSelect.vue'
+import Treeselect from "@riophae/vue-treeselect";
+import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 
 export default {
-  components: { SelectTree },
+  components: { Treeselect },
   props: {
     isAdd: {
       type: Boolean,
@@ -50,18 +50,69 @@ export default {
     return {
       dialog: false,
       menu: [],
-      form: {
-        loading: false,
-        content: '',
-      },
+      form: { },
+      // 菜单树选项
+      menuOptions: [],
     }
   },
-
+  mounted() {
+    this.getTreeselect();
+  },
   methods: {
+    /** 查询菜单下拉树结构 */
+    getTreeselect() {
+      let url = '/system/getAllMenu'
+      this.getRequest(url).then((res) => {
+        if (res) {
+          this.menuOptions = [];
+          const menu = {id: 0, name: '主菜单', chirldren: [] };
+          menu.children = this.handleTree(res.data, 'id');
+          this.menuOptions.push(menu);
+        }
+      })
+    },
     cancel() {
       this.resetForm()
     },
-  }
+    /** 转换菜单数据结构 */
+    normalizer(node) {
+      if (node.children && !node.children.length) {
+        delete node.children;
+      }
+      return {
+        id: node.id,
+        label: node.name,
+        children: node.children
+      };
+    },
+    /**
+     * 构造树型结构数据
+     * @param {*} data 数据源
+     * @param {*} id id字段 默认 'id'
+     * @param {*} parentId 父节点字段 默认 'parentId'
+     * @param {*} children 孩子节点字段 默认 'children'
+     * @param {*} rootId 根Id 默认 0
+     */
+    handleTree(data, id, parentId, children, rootId) {
+      id = id || 'id';
+      parentId = parentId || 'parentId';
+      children = children || 'children';
+      rootId = rootId || Math.min.apply(Math, data.map(item => { return item[parentId] })) || 0;
+      //对源数据深度克隆
+      const cloneData = JSON.parse(JSON.stringify(data));
+      //循环所有项
+      const treeData = cloneData.filter(father => {
+        let branchArr = cloneData.filter(child => {
+          //返回每一项的子级数组
+          return father[id] === child[parentId]
+        });
+        branchArr.length > 0 ? father.children = branchArr : '';
+        //返回第一层
+        return father[parentId] === rootId;
+      });
+      return treeData != '' ? treeData : data;
+    }
+  }  
 }
 </script>
 <style scoped>
