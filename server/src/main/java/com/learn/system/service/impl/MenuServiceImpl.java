@@ -1,5 +1,6 @@
 package com.learn.system.service.impl;
 
+import com.learn.commom.utils.IDGenerator;
 import com.learn.system.constant.SysContant;
 import com.learn.system.dao.MenuMapper;
 import com.learn.system.dao.MenuRoleMapper;
@@ -83,6 +84,24 @@ public class MenuServiceImpl implements MenuService {
         bean.setData(menuVOList);
         bean.setTotal(total);
         return bean;
+    }
+
+    @Override
+    public Integer delMenu(String menuId) {
+
+        return menuMapper.delMenu(menuId);
+    }
+
+    @Override
+    public int addMenu(Menu menu) {
+        menu.setId(IDGenerator.newID());
+        menu.setEnabled(true);
+        if ("1".equals(menu.getParentId())){
+            menu.setIsLeaf(0);
+        } else{
+            menu.setIsLeaf(1);
+        }
+        return menuMapper.insert(menu);
     }
 
     @Override

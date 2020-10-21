@@ -58,4 +58,11 @@ public interface MenuMapper {
      * @return
      */
     List<MenuDTO> getMenuByFilter(@Param("page")Integer page, @Param("size")Integer size, @Param("menu")Menu menu);
+
+    /**
+     * 删除菜单
+     * @param menuId
+     * @return
+     */
+    Integer delMenu(String menuId);
 }

@@ -86,16 +86,6 @@
     delete from menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.learn.system.model.entity.Menu">
-    insert into menu (id, url, path, 
-      component, name, iconCls, 
-      keepAlive, requireAuth, parentId, 
-      enabled)
-    values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
-      #{component,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR}, 
-      #{keepalive,jdbcType=BIT}, #{requireauth,jdbcType=BIT}, #{parentid,jdbcType=INTEGER}, 
-      #{enabled,jdbcType=BIT})
-  </insert>
     <insert id="insertSelective" parameterType="com.learn.system.model.entity.Menu">
         insert into menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -227,7 +217,7 @@
 
     <select id="getMenuByFilter" resultMap="menuDto">
         select <include refid="MenuDto_Column_List"/>
-        from menu m
+        from menu
         <where>
             <if test="menu!=null">
                 <if test="menu.name != null and menu.name!=''">
@@ -248,5 +238,16 @@
         from menu m where enabled = 1 and id != 1
     </select>
 
+    <update id="delMenu" parameterType="java.lang.String">
+        update menu set enabled = 0
+    </update>
+
+    <insert id="insert" parameterType="com.learn.system.model.entity.Menu">
+        insert into menu (id, url, path,
+          component, name, parentId, isLeaf, enabled)
+        values (#{id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+          #{component,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER},
+          #{isLeaf,jdbcType=INTEGER}, #{enabled,jdbcType=BIT})
+    </insert>
 
 </mapper>

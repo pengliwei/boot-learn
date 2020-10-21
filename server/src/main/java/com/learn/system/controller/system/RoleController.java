@@ -90,9 +90,9 @@ public class RoleController {
     @PostMapping("/saveMenu")
     public ResponseBean saveMenu(@RequestBody RoleMenuParam param) {
         Integer i = roleService.saveMenu(param.getRoleId(),param.getMenuIds());
-        if (i == 1) {
-            return ResponseBean.ok("保存成功!");
+        if (i == 0) {
+            return ResponseBean.error("保存失败!");
         }
-        return ResponseBean.error("保存失败!");
+        return ResponseBean.ok("保存成功!");
     }
 }

@@ -5,8 +5,7 @@ import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,6 +51,33 @@ public class MenuController {
     public ResponseBean getAllMenu() {
 
         return menuService.getAllMenus();
+    }
+
+    /**
+     * 新增菜单
+     *
+     * @param menu
+     * @return
+     */
+    @PostMapping("system/menu/addMenu")
+    public ResponseBean addMenu(@RequestBody Menu menu){
+        if(menuService.addMenu(menu) == 1){
+            return ResponseBean.ok("添加成功!");
+        }
+        return ResponseBean.error("添加失败!");
+    }
+
+    /**
+     * 删除菜单
+     *
+     * @param menuId
+     * @return
+     */
+    @DeleteMapping("system/menu/delMenu/{menuId}")
+    public ResponseBean delMenu(@PathVariable String menuId) {
+        //todo 删除菜单需要重新处理
+        Integer i = menuService.delMenu(menuId);
+        return null;
     }
 
 }

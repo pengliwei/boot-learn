@@ -20,6 +20,7 @@ public interface MenuService {
 
     /**
      * 查询菜单
+     *
      * @param menu
      * @return
      */
@@ -27,7 +28,24 @@ public interface MenuService {
 
     /**
      * 获取所有菜单
+     *
      * @return
      */
     ResponseBean getAllMenus();
+
+    /**
+     * 删除菜单
+     *
+     * @param menuId 菜单id
+     * @return
+     */
+    Integer delMenu(String menuId);
+
+    /**
+     * 新增菜单
+     *
+     * @param menu
+     * @return
+     */
+    int addMenu(Menu menu);
 }

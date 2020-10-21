@@ -11,11 +11,9 @@
                   @clear="initData"
                   style="width: 350px;margin-right: 10px" v-model="keyword">
         </el-input>
-        <el-button icon="el-icon-search" type="primary" @click="initData">
-            搜索
-        </el-button>
+        <el-button icon="el-icon-search" type="primary" @click="initData">搜索</el-button>
       </div>
-
+      <!--新增-->
       <div style="display: flex;justify-content: space-between">
           <el-button icon="el-icon-plus" type="primary" @click="add">新增</el-button>
       </div>
@@ -33,11 +31,11 @@
             <el-table-column prop="name" fixed align="left" label="角色名称" width="200"></el-table-column>
             <el-table-column prop="description" label="描述" align="left" width="200"></el-table-column>
             <el-table-column label="操作" width="200">
-            <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-              <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
+              <template slot-scope="scope">
+                <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+                <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
           </el-table>
           <div style="display: flex;justify-content: flex-end">
             <el-pagination

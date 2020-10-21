@@ -9,6 +9,9 @@
       <el-form-item label="菜单名称" prop="name">
         <el-input v-model="form.name" style="width: 350px;" />
       </el-form-item>
+      <el-form-item label="菜单url" prop="url">
+        <el-input v-model="form.url" style="width: 350px;" />
+      </el-form-item>
       <el-form-item label="路由地址" prop="path">
         <el-input v-model="form.path" style="width: 350px;" />
       </el-form-item>
@@ -29,7 +32,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="text" @click="cancel">取消</el-button>
-      <!-- <el-button :loading="loading" type="primary" @click="doSubmit">确认</el-button> -->
+      <el-button type="primary" @click="doSubmit">确认</el-button>
     </div>
   </el-dialog>
 </template>
@@ -72,7 +75,18 @@ export default {
       })
     },
     cancel() {
-      this.resetForm()
+      this.resetForm();
+      this.dialog = false;
+    },
+    // 保存
+    doSubmit() {
+      this.postRequest('/system/menu/addMenu',this.form).then(res => {
+        if(res){
+          this.resetForm();
+          this.dialog = false;
+          this.$parent.initData();
+        }
+      }) 
     },
     /** 转换菜单数据结构 */
     normalizer(node) {
@@ -111,6 +125,9 @@ export default {
         return father[parentId] === rootId;
       });
       return treeData != '' ? treeData : data;
+    },
+    resetForm() {
+      this.$refs['form'].resetFields()
     }
   }  
 }
