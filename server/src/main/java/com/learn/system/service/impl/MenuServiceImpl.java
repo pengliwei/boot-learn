@@ -96,9 +96,9 @@ public class MenuServiceImpl implements MenuService {
     public int addMenu(Menu menu) {
         menu.setId(IDGenerator.newID());
         menu.setEnabled(true);
-        if ("1".equals(menu.getParentId())){
+        if ("1".equals(menu.getParentId())) {
             menu.setIsLeaf(0);
-        } else{
+        } else {
             menu.setIsLeaf(1);
         }
         return menuMapper.insert(menu);
@@ -116,9 +116,9 @@ public class MenuServiceImpl implements MenuService {
                     rootMenus.add(menu);
                 }
             });
-            //为跟菜单设置子菜单，getChild是递归调用
+            //为根菜单设置子菜单，getChild是递归调用
             for (MenuDTO menu : rootMenus) {
-                //获取当前节点下的所有子节点
+                //获取当前节点下的子节点
                 List<MenuDTO> childList = getChild(menu.getId(), allMenus);
                 menu.setChildren(childList);
             }

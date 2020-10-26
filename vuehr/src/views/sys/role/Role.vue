@@ -112,7 +112,7 @@ export default {
     //加载角色数据
     initData() {
       this.loading = true
-       let url = '/system/role/getRole?page=' + this.page + '&size=' + this.size + '&name=' + this.keyword;
+      let url = '/system/role/getRole?page=' + this.page + '&size=' + this.size + '&name=' + this.keyword;
       this.getRequest(url).then((resp) => {
         if (resp) {
           this.role = resp.data;

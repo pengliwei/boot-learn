@@ -10,7 +10,7 @@ spring:
     port: 6379
     password:
 server:
-  port: 8081
+  port: 8085
   compression:
     enabled: true
 #fastdfs:

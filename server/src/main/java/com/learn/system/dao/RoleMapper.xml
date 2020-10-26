@@ -39,7 +39,7 @@
     <insert id="insert" parameterType="com.learn.system.model.entity.Role">
         insert into role (id, name, description, status
           )
-        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
           )
     </insert>
 

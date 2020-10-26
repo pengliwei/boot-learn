@@ -11,4 +11,9 @@ public class SysContant {
      * 系统菜单父节点id
      */
     public final static String MENU_PARENTID = "1";
+
+    /**
+     * 系统部门父节点id
+     */
+    public final static String DEPT_PARENTID = "1";
 }

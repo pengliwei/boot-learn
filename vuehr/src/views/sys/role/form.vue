@@ -49,11 +49,11 @@ export default {
     },
     doSubmit() {
         this.postRequest('/system/role/addRole',this.form).then(res => {
-            if(res){
-                this.resetForm();
-                this.dialog = false;
-                this.$parent.initData();
-            }
+          if(res){
+            this.resetForm();
+            this.dialog = false;
+            this.$parent.initData();
+          }
         })  
     },
     resetForm() {

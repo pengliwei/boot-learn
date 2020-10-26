@@ -60,8 +60,8 @@ public class MenuController {
      * @return
      */
     @PostMapping("system/menu/addMenu")
-    public ResponseBean addMenu(@RequestBody Menu menu){
-        if(menuService.addMenu(menu) == 1){
+    public ResponseBean addMenu(@RequestBody Menu menu) {
+        if (menuService.addMenu(menu) == 1) {
             return ResponseBean.ok("添加成功!");
         }
         return ResponseBean.error("添加失败!");
@@ -79,5 +79,4 @@ public class MenuController {
         Integer i = menuService.delMenu(menuId);
         return null;
     }
-
 }

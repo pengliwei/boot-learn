@@ -9,10 +9,6 @@ import com.learn.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @description: 角色管理
  * @author: PENGLW
@@ -62,7 +58,7 @@ public class RoleController {
      * @return
      */
     @DeleteMapping("delRole/{roleId}")
-    public ResponseBean delRole(@PathVariable  String roleId) {
+    public ResponseBean delRole(@PathVariable String roleId) {
         if (roleService.delRole(roleId) == 1) {
             return ResponseBean.ok("删除成功!");
         }
@@ -89,7 +85,7 @@ public class RoleController {
      */
     @PostMapping("/saveMenu")
     public ResponseBean saveMenu(@RequestBody RoleMenuParam param) {
-        Integer i = roleService.saveMenu(param.getRoleId(),param.getMenuIds());
+        Integer i = roleService.saveMenu(param.getRoleId(), param.getMenuIds());
         if (i == 0) {
             return ResponseBean.error("保存失败!");
         }

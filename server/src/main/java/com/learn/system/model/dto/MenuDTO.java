@@ -3,7 +3,7 @@ package com.learn.system.model.dto;
 import java.util.List;
 
 /**
- * @description:
+ * @description: 菜单实体
  * @author: PENGLW
  * @date: 2020/9/17
  */

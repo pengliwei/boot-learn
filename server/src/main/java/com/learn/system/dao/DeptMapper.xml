@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.learn.system.dao.DeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.learn.system.model.entity.Dept">
+        <id column="dept_id" property="deptId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="isLeaf" property="isLeaf" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="BaseDTOMap" type="com.learn.system.model.dto.DeptDTO">
+        <id column="dept_id" property="deptId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="isLeaf" property="isLeaf" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        dept_id, name, parent_id, isLeaf, create_time, update_time, status
+    </sql>
+
+    <select id="getDeptByFilter" parameterType="java.lang.String" resultMap="BaseDTOMap">
+        select <include refid="Base_Column_List"></include>
+        from dept t where status = 1
+        and t.parent_id = #{parentId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getAllDept" resultMap="BaseDTOMap">
+        select <include refid="Base_Column_List"></include>
+        from dept t where status = 1
+    </select>
+
+    <insert id="insert" parameterType="com.learn.system.model.entity.Dept">
+        insert into dept (dept_id, name, parent_id, isLeaf, create_time, update_time, status)
+        values (#{deptId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{isLeaf,jdbcType=VARCHAR},
+                #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+    </insert>
+
+    <update id="deleteById" parameterType="java.lang.String">
+        update dept set status = 0 where dept_id = #{deptId,jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>
