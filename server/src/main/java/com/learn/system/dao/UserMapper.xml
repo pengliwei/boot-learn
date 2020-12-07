@@ -13,171 +13,20 @@
         <result column="userface" property="userface" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="userWithRoles" type="com.learn.system.model.entity.User" extends="BaseResultMap">
-        <collection property="roles" ofType="com.learn.system.model.entity.Role">
-            <id column="rid" property="id"/>
-            <result column="rname" property="name"/>
-            <result column="rnameZh" property="nameZh"/>
-        </collection>
-    </resultMap>
+
+
+
+
     <sql id="Base_Column_List">
-    id, name, phone, telephone, address, enabled, username, password, userface, remark
-  </sql>
-    <select id="getAllusersExceptCurrentUser" resultMap="BaseResultMap">
-        select * from user where id !=#{id};
-    </select>
-    <select id="getAllUsers" resultMap="userWithRoles">
-        select user.id, user.name, user.phone, user.telephone, user.address, user.enabled, user.username, user.userface,
-        user.remark,r.`id` as rid,r.`name` as rname,r.`nameZh` as rnameZh from user left join user_role userr on
-        user.`id`=userr.`userid` left join role r on userr.`rid`=r.`id` where user.`id`!=#{userid}
-        <if test="keywords!=null">
-            and user.name like concat('%',#{keywords},'%')
-        </if>
-        order by user.id
-    </select>
-    <select id="getUserRolesById" resultType="com.learn.system.model.entity.Role">
-    select r.* from role r,user_role userr where userr.`rid`=r.`id` and userr.`userid`=#{id}
-  </select>
+        id, name, phone, telephone, address, enabled, username, password, userface, remark
+    </sql>
+
     <select id="loadUserByUsername" resultMap="BaseResultMap">
-    select * from user where username=#{username}
-  </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where id = #{id,jdbcType=INTEGER}
+        select * from user where username=#{username}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="com.learn.system.model.entity.User">
-    insert into user (id, name, phone,
-      telephone, address, enabled, 
-      username, password, userface, 
-      remark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
-      #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
-    <insert id="insertSelective" parameterType="com.learn.system.model.entity.User">
-        insert into user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="phone != null">
-                phone,
-            </if>
-            <if test="telephone != null">
-                telephone,
-            </if>
-            <if test="address != null">
-                address,
-            </if>
-            <if test="enabled != null">
-                enabled,
-            </if>
-            <if test="username != null">
-                username,
-            </if>
-            <if test="password != null">
-                password,
-            </if>
-            <if test="userface != null">
-                userface,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                #{phone,jdbcType=CHAR},
-            </if>
-            <if test="telephone != null">
-                #{telephone,jdbcType=VARCHAR},
-            </if>
-            <if test="address != null">
-                #{address,jdbcType=VARCHAR},
-            </if>
-            <if test="enabled != null">
-                #{enabled,jdbcType=BIT},
-            </if>
-            <if test="username != null">
-                #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="userface != null">
-                #{userface,jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.learn.system.model.entity.User">
-        update user
-        <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                phone = #{phone,jdbcType=CHAR},
-            </if>
-            <if test="telephone != null">
-                telephone = #{telephone,jdbcType=VARCHAR},
-            </if>
-            <if test="address != null">
-                address = #{address,jdbcType=VARCHAR},
-            </if>
-            <if test="enabled != null">
-                enabled = #{enabled,jdbcType=BIT},
-            </if>
-            <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="userface != null">
-                userface = #{userface,jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateUserface">
-        update user set userface = #{url} where id=#{id};
-    </update>
-    <update id="updatePasswd">
-        update user set password = #{encodePass} where id=#{userid};
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.learn.system.model.entity.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=CHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      enabled = #{enabled,jdbcType=BIT},
-      username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      userface = #{userface,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <select id="getUserRolesById" resultType="com.learn.system.model.entity.Role">
+        select r.* from role r,user_role userr where userr.`rid`=r.`id` and userr.`userid`=#{id}
+    </select>
+
 </mapper>

@@ -1,33 +1,30 @@
 package com.learn.system.dao;
 
-import com.learn.system.model.entity.User;
 import com.learn.system.model.entity.Role;
-import org.apache.ibatis.annotations.Param;
+import com.learn.system.model.entity.User;
 
 import java.util.List;
 
+/**
+ * @description: 用户管理dao
+ * @author: PENGLW
+ * @date: 2020/10/21
+ */
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
-
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
-
+    /**
+     * 判断用户是否存在
+     * @param username
+     * @return
+     */
     User loadUserByUsername(String username);
 
+    /**
+     * 获取用户角色
+     * @param id
+     * @return
+     */
     List<Role> getUserRolesById(Integer id);
 
-    List<User> getAllUsers(@Param("userid") Integer userid, @Param("keywords") String keywords);
-
-    List<User> getAllUsersExceptCurrentUser(Integer id);
-
-    Integer updatePasswd(@Param("userid") Integer userid, @Param("encodePass") String encodePass);
-
-    Integer updateUserface(@Param("url") String url, @Param("id") Integer id);
+//    Integer updateUserface(@Param("url") String url, @Param("id") Integer id);
 }
