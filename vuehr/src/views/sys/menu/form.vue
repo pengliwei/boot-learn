@@ -64,7 +64,7 @@ export default {
   methods: {
     /** 查询菜单下拉树结构 */
     getTreeselect() {
-      let url = '/system/getAllMenu'
+      let url = '/learn/system/getAllMenu'
       this.getRequest(url).then((res) => {
         if (res) {
           this.menuOptions = [];
@@ -80,7 +80,7 @@ export default {
     },
     // 保存
     doSubmit() {
-      this.postRequest('/system/menu/addMenu',this.form).then(res => {
+      this.postRequest('/learn/system/menu/addMenu',this.form).then(res => {
         if(res){
           this.resetForm();
           this.dialog = false;

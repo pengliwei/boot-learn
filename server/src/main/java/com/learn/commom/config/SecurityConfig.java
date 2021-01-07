@@ -118,9 +118,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         loginFilter.setAuthenticationSuccessHandler((request,response,authentication) -> {
             response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();
-            User hr = (User) authentication.getPrincipal();
-            hr.setPassword(null);
-            ResponseBean ok = ResponseBean.ok("登录成功！",hr);
+            User user = (User) authentication.getPrincipal();
+            user.setPassword(null);
+            ResponseBean ok = ResponseBean.ok("登录成功！",user);
             String str = new ObjectMapper().writeValueAsString(ok);
             out.write(str);
             out.flush();
@@ -129,6 +129,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         loginFilter.setAuthenticationFailureHandler((request, response, exception) -> {
             response.setContentType("application/json;charset=utf-8");
+            response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,Access-Token");
             PrintWriter out = response.getWriter();
             ResponseBean responseBean = ResponseBean.error(exception.getMessage());
             if (exception instanceof LockedException) {

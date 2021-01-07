@@ -58,7 +58,7 @@ export default {
     // 加载菜单
     initData() {
       this.loading = true
-      let url = '/system/menu'
+      let url = '/learn/system/menu'
       this.getRequest(url).then((resp) => {
         if (resp) {
           this.menu = resp.data
@@ -68,7 +68,7 @@ export default {
     // 加载树
     load(tree, treeNode, resolve) {
       this.loading = true
-      let url = '/system/menu'
+      let url = '/learn/system/menu'
       if (tree) {
         url += '?parentId=' + tree.id
       }
@@ -99,7 +99,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.deleteRequest("/system/menu/delMenu/"+scope.id).then(res => {
+        this.deleteRequest("/learn/system/menu/delMenu/"+scope.id).then(res => {
           if (res) {
             this.initData();
           }

@@ -58,7 +58,7 @@ export default {
     // 加载部门
     initData() {
       this.loading = false;
-      let url = '/system/dept/dept?parentId=' + this.parentId;
+      let url = '/learn/system/dept/dept?parentId=' + this.parentId;
       this.getRequest(url).then((resp) => {
         if (resp) {
           this.dept = resp.data
@@ -67,7 +67,7 @@ export default {
     },
     // 加载树
     load(tree, treeNode, resolve) {
-      let url = '/system/dept/dept'
+      let url = '/learn/system/dept/dept'
       if (tree) {
         url += '?parentId=' + tree.deptId
       }
@@ -100,7 +100,7 @@ export default {
       }).then(() => {
         this.loading = true;
         this.dept = [];
-        this.deleteRequest("/system/dept/delDept/"+scope.deptId).then(res => {
+        this.deleteRequest("/learn/system/dept/delDept/"+scope.deptId).then(res => {
           if (res) {
             this.initData();
           }

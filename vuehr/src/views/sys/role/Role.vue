@@ -112,7 +112,7 @@ export default {
     //加载角色数据
     initData() {
       this.loading = true
-      let url = '/system/role/getRole?page=' + this.page + '&size=' + this.size + '&name=' + this.keyword;
+      let url = '/learn/system/role/getRole?page=' + this.page + '&size=' + this.size + '&name=' + this.keyword;
       this.getRequest(url).then((resp) => {
         if (resp) {
           this.role = resp.data;
@@ -147,7 +147,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.deleteRequest("/system/role/delRole/"+scope.id).then(res => {
+        this.deleteRequest("/learn/system/role/delRole/"+scope.id).then(res => {
           if (res) {
             this.initData();
           }
@@ -159,7 +159,7 @@ export default {
       //赋值对象
       const _this = this;
       this.roleId = val.id;
-      let url = '/system/role/getRoleMenu?roleId=' + val.id;
+      let url = '/learn/system/role/getRoleMenu?roleId=' + val.id;
       this.getRequest(url).then((res) => {
         //清空菜单的选中       
         this.$refs.menu.setCheckedKeys([]);
@@ -177,7 +177,7 @@ export default {
     //保存角色菜单
     saveMenu() {
       this.menuLoading = true;
-      let url = '/system/role/saveMenu';
+      let url = '/learn/system/role/saveMenu';
       const parm = { 'roleId': this.roleId, 'menuIds': this.menuIds };
       this.postRequest(url,parm).then((res) => {
         this.menuLoading = false;
@@ -186,7 +186,7 @@ export default {
     },
     //加载菜单树
     getMenuDatas() {
-      let url = '/system/getAllMenu'
+      let url = '/learn/system/getAllMenu'
       this.getRequest(url).then((res) => {
         if (res) {
           res.data.map(item =>{

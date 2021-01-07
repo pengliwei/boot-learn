@@ -54,7 +54,7 @@ export default {
   methods: {
     /** 查询菜单下拉树结构 */
     getTreeselect() {
-      let url = '/system/dept/getAllDept'
+      let url = '/learn/system/dept/getAllDept'
       this.getRequest(url).then((res) => {
         if (res) {
           this.deptOptions = [];
@@ -70,7 +70,7 @@ export default {
     },
     // 保存
     doSubmit() {
-      this.postRequest('/system/dept/addDept',this.form).then(res => {
+      this.postRequest('/learn/system/dept/addDept',this.form).then(res => {
         if(res){
           this.resetForm();
           this.dialog = false;

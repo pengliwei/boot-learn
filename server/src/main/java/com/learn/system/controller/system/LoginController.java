@@ -30,7 +30,7 @@ public class LoginController {
         VerificationCode code = new VerificationCode();
         BufferedImage image = code.getImage();
         String text = code.getText();
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         session.setAttribute("verify_code", text);
         VerificationCode.output(image,resp.getOutputStream());
     }

@@ -73,6 +73,13 @@
     select distinct m1.*,m2.`id` as id2,m2.`component` as component2,m2.`enabled` as enabled2,m2.`iconCls` as iconCls2,m2.`name` as name2,m2.`parentId` as parentId2,m2.`path` as path2 from menu m1,menu m2,user_role user,menu_role mr where m1.`id`=m2.`parentId` and user.`userid`=#{userid} and user.`rid`=mr.`role_id` and mr.`menu_id`=m2.`id` and m2.`enabled`=true order by m1.`id`,m2.`id`
     </select>
 
+    <select id="getMenusByUserId2" resultMap="menuDto" parameterType="java.lang.String">
+        select t1.* from menu t1 LEFT JOIN menu_role t2 on t1.id = t2.menu_id
+        LEFT JOIN role t3 on t2.role_id = t3.id
+        LEFT JOIN user_role t4 on t3.id = t4.rid
+        where t4.userid = #{userId,jdbcType=VARCHAR} and t1.enabled = 1
+    </select>
+
     <sql id="Base_Column_List">
     id, url, path, component, name, iconCls, keepAlive, requireAuth, parentId, enabled
   </sql>

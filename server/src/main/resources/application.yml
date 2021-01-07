@@ -1,18 +1,21 @@
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: 123456
     url: jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-  redis:
-    host: 127.0.0.1
-    database: 2
-    port: 6379
-    password:
+#  redis:
+#    host: 127.0.0.1
+#    database: 2
+#    port: 6379
+#    password:
 server:
   port: 8085
   compression:
     enabled: true
+  servlet:
+    context-path: /learn
 #fastdfs:
 #  nginx:
 #    host: http://192.168.91.128/

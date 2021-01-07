@@ -36,7 +36,7 @@
         data() {
             return {
                 loading: false,
-                vcUrl: '/verifyCode?time='+new Date(),
+                vcUrl: '/learn/verifyCode?time='+new Date(),
                 loginForm: {
                     username: 'admin',
                     password: '123',
@@ -52,13 +52,13 @@
         },
         methods: {
             updateVerifyCode() {
-                this.vcUrl = '/verifyCode?time='+new Date();
+                this.vcUrl = '/learn/verifyCode?time='+new Date();
             },
             submitLogin() {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
                         this.loading = true;
-                        this.postRequest('/doLogin', this.loginForm).then(resp => {
+                        this.postRequest('/learn/doLogin', this.loginForm).then(resp => {
                             this.loading = false;
                             if (resp) {
                                 this.$store.commit('INIT_CURRENTHR', resp.data);
@@ -66,7 +66,7 @@
                                 let path = this.$route.query.redirect;
                                 this.$router.replace((path == '/' || path == undefined) ? '/home' : path);
                             }else{
-                                this.vcUrl = '/verifyCode?time='+new Date();
+                                this.vcUrl = '/learn/verifyCode?time='+new Date();
                             }
                         })
                     } else {

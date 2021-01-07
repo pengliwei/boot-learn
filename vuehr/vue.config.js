@@ -4,9 +4,9 @@ proxyObj['/ws'] = {
     ws: true,
     target: "http://localhost:8085"
 };
-proxyObj['/'] = {
+proxyObj['/learn'] = {
     ws: false,
-    target: 'http://localhost:8085',
+    target: 'http://119.8.113.83:8085',
     changeOrigin: true,
     pathRewrite: {
         '^/': ''

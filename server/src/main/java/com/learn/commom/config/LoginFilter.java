@@ -35,9 +35,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String verify_code = request.getSession().getAttribute("verify_code").toString();
         if (request.getContentType().contains(MediaType.APPLICATION_JSON_VALUE) || request.getContentType().contains(MediaType.APPLICATION_JSON_UTF8_VALUE)) {
             Map<String, String> loginData = new HashMap<>();
-            try{
-                loginData = new ObjectMapper().readValue(request.getInputStream(),Map.class);
-            }catch (IOException e){
+            try {
+                loginData = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+            } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 String code = loginData.get("code");

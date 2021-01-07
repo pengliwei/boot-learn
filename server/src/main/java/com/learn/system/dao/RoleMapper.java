@@ -56,4 +56,11 @@ public interface RoleMapper {
      * @return
      */
     Integer deleteById(String roleId);
+
+    /**
+     * 根据用户id获取角色
+     * @param userId
+     * @return
+     */
+    List<Role> getRoleByUserId(String userId);
 }
