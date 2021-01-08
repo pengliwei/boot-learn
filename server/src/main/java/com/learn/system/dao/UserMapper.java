@@ -14,6 +14,7 @@ public interface UserMapper {
 
     /**
      * 判断用户是否存在
+     *
      * @param username
      * @return
      */
@@ -21,10 +22,10 @@ public interface UserMapper {
 
     /**
      * 获取用户角色
+     *
      * @param id
      * @return
      */
     List<Role> getUserRolesById(Integer id);
 
-//    Integer updateUserface(@Param("url") String url, @Param("id") Integer id);
 }

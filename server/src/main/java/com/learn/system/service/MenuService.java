@@ -10,13 +10,19 @@ import java.util.List;
 
 public interface MenuService {
 
+    /**
+     * 通过用户id获取菜单
+     *
+     * @return
+     */
     List<Menu> getMenusByUserId();
 
+    /**
+     * 获取所有菜单和角色
+     *
+     * @return
+     */
     List<Menu> getAllMenusWithRole();
-
-    List<Integer> getMidsByRid(Integer rid);
-
-    boolean updateMenuRole(Integer rid, Integer[] mids);
 
     /**
      * 查询菜单

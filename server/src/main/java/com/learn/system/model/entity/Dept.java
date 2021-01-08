@@ -1,7 +1,6 @@
 package com.learn.system.model.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @description: 部门实体

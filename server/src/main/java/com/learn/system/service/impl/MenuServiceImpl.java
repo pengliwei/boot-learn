@@ -15,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,23 +43,6 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getAllMenusWithRole() {
 
         return menuMapper.getAllMenusWithRole();
-    }
-
-    @Override
-    public List<Integer> getMidsByRid(Integer rid) {
-
-        return menuMapper.getMidsByRid(rid);
-    }
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public boolean updateMenuRole(Integer rid, Integer[] mids) {
-        menuRoleMapper.deleteByRid(rid);
-        if (mids == null || mids.length == 0) {
-            return true;
-        }
-        Integer result = menuRoleMapper.insertRecord(rid, mids);
-        return result == mids.length;
     }
 
     @Override

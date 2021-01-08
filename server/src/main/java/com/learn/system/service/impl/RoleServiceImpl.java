@@ -59,11 +59,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Integer deleteRoleById(Integer rid) {
-        return roleMapper.deleteByPrimaryKey(rid);
-    }
-
-    @Override
     public ResponseBean getMenuIdsByRoleId(String roleId) {
         //获取对应菜单并返回不同类型结果
         List<String> menuIds = menuRoleMapper.getMenuIdsByRoleId(roleId);

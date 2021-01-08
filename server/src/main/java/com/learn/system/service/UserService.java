@@ -7,5 +7,11 @@ import java.util.List;
 
 public interface UserService {
 
+    /**
+     * 获取用户
+     *
+     * @param user
+     * @return
+     */
     List<User> getUserByFilter(User user);
 }

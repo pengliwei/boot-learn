@@ -1,9 +1,8 @@
 package com.learn.commom.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learn.system.model.entity.User;
 import com.learn.system.model.entity.ResponseBean;
-import com.learn.system.service.UserService;
+import com.learn.system.model.entity.User;
 import com.learn.system.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -70,8 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                                                  return object;
                                                              }
                                                          }
-            )
-            .and()
+        )
+                .and()
                 .logout()
                 .logoutSuccessHandler((req, resp, authentication) -> {
                             resp.setContentType("application/json;charset=utf-8");
@@ -82,14 +81,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         }
                 )
                 .permitAll()
-            .and()
-            //没有认证时，在这里处理结果，不要重定向
-            .csrf().disable().exceptionHandling()
-                .authenticationEntryPoint((req,res,authException) ->{
+                .and()
+                //没有认证时，在这里处理结果，不要重定向
+                .csrf().disable().exceptionHandling()
+                .authenticationEntryPoint((req, res, authException) -> {
                     res.setContentType("application/json;charset=utf-8");
                     res.setStatus(401);
                     PrintWriter out = res.getWriter();
-                    ResponseBean responseBean =ResponseBean.error("访问失败！");
+                    ResponseBean responseBean = ResponseBean.error("访问失败！");
 
                     out.write(new ObjectMapper().writeValueAsString(responseBean));
                     out.flush();
@@ -113,14 +112,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    LoginFilter loginFilter() throws Exception{
+    LoginFilter loginFilter() throws Exception {
         LoginFilter loginFilter = new LoginFilter();
-        loginFilter.setAuthenticationSuccessHandler((request,response,authentication) -> {
+        loginFilter.setAuthenticationSuccessHandler((request, response, authentication) -> {
             response.setContentType("application/json;charset=utf-8");
             PrintWriter out = response.getWriter();
             User user = (User) authentication.getPrincipal();
             user.setPassword(null);
-            ResponseBean ok = ResponseBean.ok("登录成功！",user);
+            ResponseBean ok = ResponseBean.ok("登录成功！", user);
             String str = new ObjectMapper().writeValueAsString(ok);
             out.write(str);
             out.flush();
@@ -129,7 +128,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         loginFilter.setAuthenticationFailureHandler((request, response, exception) -> {
             response.setContentType("application/json;charset=utf-8");
-            response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+            response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.setHeader("Access-Control-Allow-Methods", "*");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Allow-Headers", "Authorization,Origin, X-Requested-With, Content-Type, Accept,Access-Token");

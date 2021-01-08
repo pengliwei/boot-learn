@@ -27,13 +27,15 @@
     </sql>
 
     <select id="getDeptByFilter" parameterType="java.lang.String" resultMap="BaseDTOMap">
-        select <include refid="Base_Column_List"></include>
+        select
+        <include refid="Base_Column_List"></include>
         from dept t where status = 1
         and t.parent_id = #{parentId,jdbcType=VARCHAR}
     </select>
 
     <select id="getAllDept" resultMap="BaseDTOMap">
-        select <include refid="Base_Column_List"></include>
+        select
+        <include refid="Base_Column_List"></include>
         from dept t where status = 1
     </select>
 

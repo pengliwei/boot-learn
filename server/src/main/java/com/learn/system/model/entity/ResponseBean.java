@@ -19,20 +19,20 @@ public class ResponseBean {
         return new ResponseBean();
     }
 
-    public static ResponseBean ok(String msg){
-        return new ResponseBean(200,msg,null);
+    public static ResponseBean ok(String msg) {
+        return new ResponseBean(200, msg, null);
     }
 
-    public static ResponseBean ok(String msg, Object data){
-        return new ResponseBean(200,msg,data);
+    public static ResponseBean ok(String msg, Object data) {
+        return new ResponseBean(200, msg, data);
     }
 
-    public static ResponseBean error(String msg){
-        return new ResponseBean(500,msg,null);
+    public static ResponseBean error(String msg) {
+        return new ResponseBean(500, msg, null);
     }
 
-    public static ResponseBean error(String msg, Object data){
-        return new ResponseBean(500,msg,data);
+    public static ResponseBean error(String msg, Object data) {
+        return new ResponseBean(500, msg, data);
     }
 
     public ResponseBean() {
@@ -40,6 +40,7 @@ public class ResponseBean {
 
     /**
      * 输出正常有值内容的类型
+     *
      * @param data
      */
     public ResponseBean(Object data) {
@@ -50,10 +51,11 @@ public class ResponseBean {
 
     /**
      * 输出正常有值内容的类型
+     *
      * @param msg
      * @param data
      */
-    public ResponseBean(String msg, Object data){
+    public ResponseBean(String msg, Object data) {
         this.status = 200;
         this.msg = msg;
         this.data = data;
@@ -61,15 +63,16 @@ public class ResponseBean {
 
     /**
      * 输出无值返回结果的类型
+     *
      * @param status
      * @param msg
      */
-    public ResponseBean(Integer status, String msg){
+    public ResponseBean(Integer status, String msg) {
         this.status = status;
         this.msg = msg;
     }
 
-    public ResponseBean(Integer status, String msg, Object data){
+    public ResponseBean(Integer status, String msg, Object data) {
         this.status = status;
         this.msg = msg;
         this.data = data;

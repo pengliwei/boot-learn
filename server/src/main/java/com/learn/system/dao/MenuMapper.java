@@ -7,23 +7,24 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @description: 用户管理dao
+ * @author: PENGLW
+ * @date: 2020/10/21
+ */
 public interface MenuMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Menu record);
-
-    int insertSelective(Menu record);
-
-    Menu selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Menu record);
-
-    int updateByPrimaryKey(Menu record);
-
-    List<Integer> getMidsByRid(Integer rid);
+    /**
+     * 插入菜单
+     *
+     * @param menu
+     * @return
+     */
+    int insert(Menu menu);
 
     /**
      * 根据用户查询菜单id
+     *
      * @param userid
      * @return
      */
@@ -31,12 +32,14 @@ public interface MenuMapper {
 
     /**
      * 获取当前角色下的菜单
+     *
      * @return
      */
     List<Menu> getAllMenusWithRole();
 
     /**
      * 获取所有菜单
+     *
      * @return
      */
     List<MenuDTO> getAllMenus();
@@ -57,10 +60,11 @@ public interface MenuMapper {
      * @param menu
      * @return
      */
-    List<MenuDTO> getMenuByFilter(@Param("page")Integer page, @Param("size")Integer size, @Param("menu")Menu menu);
+    List<MenuDTO> getMenuByFilter(@Param("page") Integer page, @Param("size") Integer size, @Param("menu") Menu menu);
 
     /**
      * 删除菜单
+     *
      * @param menuId
      * @return
      */

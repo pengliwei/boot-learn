@@ -41,14 +41,6 @@ public interface RoleService {
     Integer addRole(Role role);
 
     /**
-     * 删除角色
-     *
-     * @param roleId
-     * @return
-     */
-    Integer deleteRoleById(Integer roleId);
-
-    /**
      * 根据角色id获取菜单id
      *
      * @param roleId

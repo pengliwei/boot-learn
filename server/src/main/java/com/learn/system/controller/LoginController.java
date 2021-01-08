@@ -1,4 +1,4 @@
-package com.learn.system.controller.system;
+package com.learn.system.controller;
 
 
 import com.learn.commom.config.VerificationCode;
@@ -32,6 +32,6 @@ public class LoginController {
         String text = code.getText();
         HttpSession session = request.getSession();
         session.setAttribute("verify_code", text);
-        VerificationCode.output(image,resp.getOutputStream());
+        VerificationCode.output(image, resp.getOutputStream());
     }
 }

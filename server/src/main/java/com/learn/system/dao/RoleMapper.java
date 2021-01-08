@@ -6,24 +6,20 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @description: 角色管理dao
+ * @author: PENGLW
+ * @date: 2020/10/21
+ */
 public interface RoleMapper {
-    int deleteByPrimaryKey(Integer id);
 
     /**
      * 新增角色
      *
-     * @param record
+     * @param role
      * @return
      */
-    int insert(Role record);
-
-    int insertSelective(Role record);
-
-    Role selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Role record);
-
-    int updateByPrimaryKey(Role record);
+    int insert(Role role);
 
     /**
      * 获取分页记录数
@@ -47,7 +43,7 @@ public interface RoleMapper {
      * @param name 角色名称
      * @return
      */
-    List<Role> getRoleByFilter(@Param("page")Integer page, @Param("size")Integer size, @Param("name")String name);
+    List<Role> getRoleByFilter(@Param("page") Integer page, @Param("size") Integer size, @Param("name") String name);
 
     /**
      * 逻辑删除角色
@@ -57,10 +53,4 @@ public interface RoleMapper {
      */
     Integer deleteById(String roleId);
 
-    /**
-     * 根据用户id获取角色
-     * @param userId
-     * @return
-     */
-    List<Role> getRoleByUserId(String userId);
 }

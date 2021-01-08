@@ -5,22 +5,20 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * @description: 菜单角色dao
+ * @author: PENGLW
+ * @date: 2020/10/21
+ */
 public interface MenuRoleMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(MenuRole record);
-
-    int insertSelective(MenuRole record);
-
-    MenuRole selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(MenuRole record);
-
-    int updateByPrimaryKey(MenuRole record);
-
-    void deleteByRid(Integer rid);
-
-    Integer insertRecord(@Param("rid") Integer rid, @Param("mids") Integer[] mids);
+    /**
+     * 插入记录
+     *
+     * @param menuRole
+     * @return
+     */
+    int insert(MenuRole menuRole);
 
     /**
      * 根据角色id获取对应的菜单menuIds
@@ -39,6 +37,7 @@ public interface MenuRoleMapper {
 
     /**
      * 批量插入记录
+     *
      * @param menuRoleList
      * @return
      */

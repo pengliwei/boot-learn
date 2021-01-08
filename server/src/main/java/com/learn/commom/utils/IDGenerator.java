@@ -12,10 +12,10 @@ public class IDGenerator {
     private IDGenerator() {
     }
 
-    public static String newID(){
-        UUID uuid=UUID.randomUUID();
+    public static String newID() {
+        UUID uuid = UUID.randomUUID();
         String str = uuid.toString();
-        String uuidStr=str.replace("-", "");
+        String uuidStr = str.replace("-", "");
         return uuidStr;
     }
 

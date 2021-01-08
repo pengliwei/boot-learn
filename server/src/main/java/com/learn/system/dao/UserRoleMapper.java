@@ -1,22 +1,20 @@
 package com.learn.system.dao;
 
 import com.learn.system.model.entity.UserRole;
-import org.apache.ibatis.annotations.Param;
 
+/**
+ * @description: 用户角色dao
+ * @author: PENGLW
+ * @date: 2020/10/21
+ */
 public interface UserRoleMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(UserRole record);
+    /**
+     * 插入记录
+     *
+     * @param userRole
+     * @return
+     */
+    int insert(UserRole userRole);
 
-    int insertSelective(UserRole record);
-
-    UserRole selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(UserRole record);
-
-    int updateByPrimaryKey(UserRole record);
-
-    void deleteByUserid(Integer userid);
-
-    Integer addRole(@Param("userid") Integer userid, @Param("rids") Integer[] rids);
 }
