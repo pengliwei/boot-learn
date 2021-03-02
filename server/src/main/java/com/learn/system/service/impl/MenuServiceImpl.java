@@ -25,7 +25,6 @@ import java.util.List;
  * @date: 2020/9/16
  */
 @Service
-//@CacheConfig(cacheNames = "menus_cache")
 public class MenuServiceImpl implements MenuService {
 
     @Autowired

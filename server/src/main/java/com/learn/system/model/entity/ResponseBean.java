@@ -2,12 +2,14 @@ package com.learn.system.model.entity;
 
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
+
 /**
  * @description: 返回对象
  * @author: PENGLW
  * @date: 2020/8/30
  */
-public class ResponseBean {
+public class ResponseBean implements Serializable {
 
     private Integer status;
 

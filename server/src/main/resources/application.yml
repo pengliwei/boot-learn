@@ -4,11 +4,14 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#  redis:
-#    host: 127.0.0.1
-#    database: 2
-#    port: 6379
-#    password:
+  redis:
+    host: 127.0.0.1
+    database: 2
+    port: 6379
+    password:
+  cache:
+    cache-names: c1
+
 server:
   port: 8085
   compression:

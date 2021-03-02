@@ -4,6 +4,8 @@ import com.learn.system.model.entity.Menu;
 import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.model.entity.ResponsePageBean;
 import com.learn.system.service.MenuService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,8 @@ import java.util.List;
  * @date: 2020/9/8
  */
 @RestController
+@Api(tags = "菜单管理相关接口")
+@RequestMapping("/")
 public class MenuController {
 
     @Autowired
@@ -25,7 +29,8 @@ public class MenuController {
      *
      * @return
      */
-    @GetMapping("/system/config/menu")
+    @ApiOperation("根据用户获取菜单")
+    @GetMapping("system/config/menu")
     public List<Menu> getMenusByUserId() {
         return menuService.getMenusByUserId();
     }
@@ -36,7 +41,7 @@ public class MenuController {
      * @param menu
      * @return
      */
-    @GetMapping("/system/menu")
+    @GetMapping("system/menu")
     public ResponsePageBean getEmployeeByPage(Menu menu) {
 
         return menuService.getMenuByFilter(menu);
@@ -47,7 +52,7 @@ public class MenuController {
      *
      * @return
      */
-    @GetMapping("/system/getAllMenu")
+    @GetMapping("system/getAllMenu")
     public ResponseBean getAllMenu() {
 
         return menuService.getAllMenus();

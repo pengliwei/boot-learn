@@ -4,6 +4,7 @@ import com.learn.system.model.entity.Dept;
 import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 /**

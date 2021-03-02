@@ -11,6 +11,9 @@ import com.learn.system.service.DeptService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,12 +25,14 @@ import java.util.List;
  * @date: 2020/10/21
  */
 @Service
+@CacheConfig(cacheNames = "c1")
 public class DeptServiceImpl implements DeptService {
 
     @Autowired
     private DeptMapper deptMapper;
 
     @Override
+    @Cacheable(key = "#parentId")
     public ResponseBean getDeptByFilter(String parentId) {
         if (StringUtils.isBlank(parentId)) {
             //默认查询部门为最上级部门
@@ -50,6 +55,7 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     public Integer addDept(Dept dept) {
         dept.setDeptId(IDGenerator.newID());
         dept.setStatus(1);
@@ -60,6 +66,7 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
+    @CacheEvict(allEntries = true)
     public Integer delDept(String deptId) {
         //todo 判断部门下面是否有关联用户
         return deptMapper.deleteById(deptId);
