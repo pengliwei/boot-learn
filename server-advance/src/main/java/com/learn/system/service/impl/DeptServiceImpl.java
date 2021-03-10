@@ -1,5 +1,6 @@
 package com.learn.system.service.impl;
 
+import com.learn.commom.config.mysql.*;
 import com.learn.commom.utils.DateUtil;
 import com.learn.commom.utils.IDGenerator;
 import com.learn.system.constant.SysContant;
@@ -10,6 +11,8 @@ import com.learn.system.model.entity.ResponseBean;
 import com.learn.system.service.DeptService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -28,12 +31,21 @@ import java.util.List;
 @CacheConfig(cacheNames = "c1")
 public class DeptServiceImpl implements DeptService {
 
+    private static final Logger logger = LoggerFactory.getLogger(DeptServiceImpl.class);
+
     @Autowired
     private DeptMapper deptMapper;
 
+    /**
+     * @param parentId 父id
+     * @return
+     * @Read 注解：调用mysql从数据库
+     */
     @Override
+    @Read
     @Cacheable(key = "#parentId")
     public ResponseBean getDeptByFilter(String parentId) {
+        logger.info("当前使用数据源：" + DynamicDBTypeUtil.get().toString());
         if (StringUtils.isBlank(parentId)) {
             //默认查询部门为最上级部门
             parentId = "1";
@@ -54,9 +66,18 @@ public class DeptServiceImpl implements DeptService {
         return new ResponseBean(deptList);
     }
 
+    /**
+     * allEntries 注解：当前方法调用后清除缓存
+     *
+     * @param dept
+     * @return
+     * @Write 注解：调用mysql主数据库
+     */
+    @Write
     @Override
     @CacheEvict(allEntries = true)
     public Integer addDept(Dept dept) {
+        logger.info("当前使用数据源：" + DynamicDBTypeUtil.get().toString());
         dept.setDeptId(IDGenerator.newID());
         dept.setStatus(1);
         dept.setCreateTime(String.valueOf(System.currentTimeMillis()));

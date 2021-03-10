@@ -1,11 +1,28 @@
+#spring:
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+
+
+#配置主从数据库
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    druid:
+      master:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://119.8.113.83:3306/learn?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+      slave:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://39.96.91.220:3306/learn?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+
   redis:
-    host: 127.0.0.1
+    host: 119.8.113.83
     database: 2
     port: 6379
     password:
@@ -20,6 +37,6 @@ server:
     context-path: /learn
 
 
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
